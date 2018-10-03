@@ -1,10 +1,14 @@
 # PHP Template Engine
-Developed to help display dynamic variables using custom tag elements in html files
+Developed to help display dynamic variables using custom tag elements in html files.
+
+## Installing
+include core/TemplateBuilder.php to project.
 
 ## Usage
-### Custom Attributes
-* tb:attribute="variable_name"
-#### PHP
+Usage for custom tags and attributes.
+
+### tb:attribute="variable_name"
+PHP :
 ```php
     require_once '../core/TemplateBuilder.php';
     $templateBuilder = new TemplateBuilder();
@@ -12,18 +16,17 @@ Developed to help display dynamic variables using custom tag elements in html fi
     $templateBuilder -> setVariable("message", "Hello World");
     $templateBuilder -> render('...');
 ```
-#### HTML
+HTML :
 ```html
     <input type="text" name="message" tb:value="message" placeholder="Enter Message"/>
 ```
-#### OUTPUT
+OUTPUT :
 ```html
     <input type="text" name="message" value="Hello World" placeholder="Enter Message"/>
 ```
 
-### Custom Tags
-* tb:include attr=""
-#### PHP
+### tb:include attr="file_location"
+PHP :
 ```php
     require_once '../core/TemplateBuilder.php';
     $templateBuilder = new TemplateBuilder();
@@ -32,7 +35,7 @@ Developed to help display dynamic variables using custom tag elements in html fi
     $templateBuilder -> setVariable("footer", "../view/footer.html");
     $templateBuilder -> render('../layout/default.html');
 ```
-#### HTML
+HTML :
 ```html
     <body>
         <tb:include file="header"/>
@@ -40,7 +43,7 @@ Developed to help display dynamic variables using custom tag elements in html fi
         <tb:include file="footer"/>
     </body>
 ```
-#### OUTPUT
+OUTPUT :
 ```html
     <body>
         <!-- view/header.html contents -->
@@ -49,8 +52,8 @@ Developed to help display dynamic variables using custom tag elements in html fi
     </body>
 ```
 
-* tb:print var=""
-#### PHP
+### tb:print var="variable_name"
+PHP :
 ```php
     class Model {
         private $name;
@@ -70,20 +73,105 @@ Developed to help display dynamic variables using custom tag elements in html fi
     $templateBuilder -> setVariable("model", new Model());
     $templateBuilder -> render('...');
 ```
-#### HTML
+HTML :
 ```html
     <contents>
         <span><tb:print var="model.name"/></span>
     </contents>
 ```
-#### OUTPUT
+OUTPUT :
 ```html
     <contents>
         <span>Model : Hello World!</span>
     </contents>
 ```
 
-* tb:set var="" val=""
-* tb:if var=""
-* tb:for item="" var=""
-* tb:jscript
+### tb:set var="variable_name" val="variable_value"
+HTML :
+```html
+    <contents>
+        <tb:set var="say" val="Something"/>
+        <span><tb:print var="say"/></span>
+    </contents>
+```
+OUTPUT :
+```html
+    <contents>
+        <span>Something</span>
+    </contents>
+```
+
+### tb:if var="variable_name"
+PHP :
+```php
+    require_once '../core/TemplateBuilder.php';
+    $templateBuilder = new TemplateBuilder();
+    $templateBuilder -> setVariable("say", "Something");
+    $templateBuilder -> setVariable("error", false);
+    $templateBuilder -> render('...');
+```
+HTML :
+```html
+    <contents>
+        <tb:if var="say">
+            <span class="message">Say <tb:print var="say"/></span>
+        </tb:if>
+        <tb:if var="error">
+            <span class="error">show error</span>
+        </tb:if>
+    </contents>
+```
+OUTPUT :
+```html
+    <contents>
+        <span class="message">Say Something</span>
+    </contents>
+```
+
+### tb:for item="variable_array" var="variable_name"
+PHP :
+```php
+    require_once '../core/TemplateBuilder.php';
+    $templateBuilder = new TemplateBuilder();
+    $templateBuilder -> setVariable("repeatLoop", array(1,2,3));
+    $templateBuilder -> render('...');
+```
+HTML :
+```html
+    <contents>
+        <tb:for item="repeatLoop" var="repeatVar">
+            <span><tb:print var="repeatVar"/></span><br>
+        </tb:for>
+    </contents>
+```
+OUTPUT :
+```html
+    <contents>
+        <span>1</span><br>
+        <span>2</span><br>
+        <span>3</span><br>
+    </contents>
+```
+
+### tb:jscript - {{variable_name}}
+PHP :
+```php
+    require_once '../core/TemplateBuilder.php';
+    $templateBuilder = new TemplateBuilder();
+    $templateBuilder -> setVariable("say", "Something");
+    $templateBuilder -> render('...');
+```
+HTML :
+```html
+    <tb:jscript>
+        var say = '{{say}}';
+        console.log('Say ' + say);
+    </tb:jscript>
+```
+OUTPUT :
+```html
+    <script type="text/javascript">
+        var say = 'Something';
+        console.log('Say ' + say);
+    </script>
+```
