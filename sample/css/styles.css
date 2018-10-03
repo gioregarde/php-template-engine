@@ -1,0 +1,64 @@
+body { padding: 0; margin: 0; }
+
+header {
+    background: #333333;
+    color: #FFF;
+    height: 50px;
+    width: calc(100% - 50px);
+    line-height: 50px;
+    position: absolute;
+    top: 0;
+    padding: 0 25px;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+contents {
+    height: calc(100% - 100px);
+    width: calc(100% - 50px);
+    position: absolute;
+    top: 50px;
+    padding: 10px 25px;
+    overflow-y: auto;
+}
+
+footer {
+    background: #333333;
+    color: #FFF;
+    height: 30px;
+    width: calc(100% - 50px);
+    line-height: 30px;
+    position: absolute;
+    bottom: 0;
+    padding: 0 25px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+/* Say Page */
+contents form label {
+    display: block;
+    padding-bottom: 10px;
+}
+
+contents span.message {
+    background: green;
+    color: #FFFFFF;
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 5px;
+    padding: 5px;
+    font-weight: bold;
+    opacity: .9;
+    transition: .5s;
+}
+
+contents span.message button {
+    background: none;
+    border: 0;
+    color: #FFFFFF;
+    vertical-align: top;
+    font-weight: bold;
+    float: right;
+}

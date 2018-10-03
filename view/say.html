@@ -1,0 +1,32 @@
+<contents>
+    <tb:jscript>
+        var message = '{{message}}';
+        var repeat = '{{repeat}}';
+
+        console.log('Say ' + message + ' - ' + repeat);
+
+        function say(element){
+            element.parentNode.style.opacity = 0;
+            setTimeout(function() {
+                element.parentNode.style.display = 'none';
+            }, 500);
+        }
+    </tb:jscript>
+    <form method="post" action="say.php">
+        <label>
+            <span>Message: </span>
+            <input type="text" name="message" tb:value="message" placeholder="Enter Message"/>
+        </label>
+        <label>
+            <span>Repeat: </span>
+            <input type="number" name="repeat" tb:value="repeat"/>
+        </label>
+        <input type="submit" value="OK"/>
+    </form>
+
+    <tb:if var="message">
+        <tb:for item="repeatLoop" var="repeatVar">
+            <span class="message">Say <tb:print var="message"/><button onclick="say(this)">X</button></span>
+        </tb:for>
+    </tb:if>
+</contents>
