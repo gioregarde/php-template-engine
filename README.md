@@ -25,7 +25,7 @@ OUTPUT :
     <input type="text" name="message" value="Hello World" placeholder="Enter Message"/>
 ```
 
-### tb:include attr="file_location"
+### tb:include file="file_location"
 PHP :
 ```php
     require_once '../core/TemplateBuilder.php';

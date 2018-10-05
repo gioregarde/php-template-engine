@@ -13,7 +13,7 @@
  * 
  * Custom Tags
  *   tb:jscript
- *   tb:include attr=""
+ *   tb:include file=""
  *   tb:set var="" val=""
  *   tb:print var=""
  *   tb:if var=""
